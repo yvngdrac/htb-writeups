@@ -19,7 +19,7 @@ Performed an Nmap scan:
 nmap -sC -sV -Pn -p- 10.129.X.X
 ```
 
-![nmap result](./images/1-nmap.png)
+![nmap result](./HTB_THINGY/nmap_result.png)
 
 Discovered:
 - Port 80 (HTTP)
