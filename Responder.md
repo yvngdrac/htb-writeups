@@ -1,5 +1,5 @@
 # 🧠 Responder – HTB Starting Point Write-Up  
-**Author:** dotguy  
+**Author:** yvngdrac  
 **Tier:** 1  
 **Category:** Windows, LFI, Responder, NetNTLMv2, Password Cracking, Evil-WinRM  
 
